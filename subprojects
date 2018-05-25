@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+# NB: this script is designed to be placed in your main repository, the
+# 'superproject', into which you want to include the subproject.
+# It then can be used to pull and push changes
+# to the subproject's repository without needing to use the subtree command
+# directly (which is very complicated).
+#
+# Robert Muil
+set -o errexit
+
+### Edit following to fit your project:
+subprojects=("analysis")
+subdir="core"
+remote_suffix="_origin"
+####
+
+task="$1"
+
+if [ "$task" == "pull" ]; then
+	echo "This will update the subprojects (${subprojects[*]}) to their latest remote master branch of each. Any key to continue. (ctr-c to abort)"
+	read
+
+	for proj in ${subprojects[*]}; do
+		git subtree pull -P ${subdir}/${proj} --squash -m "Updated to latest from '${proj}' project" ${proj}${remote_suffix} master
+	done
+elif [ "$task" == "push" ]; then
+	echo "This will push changes from subprojects (${subprojects[*]}) to their upstream repositories. Any key to continue. (ctrl-c to abort)"
+	read
+
+	for proj in ${subprojects[*]}; do
+		git subtree split -P ${subdir}/${proj} --annotate="(split)" -b ${proj}${remote_suffix}_update
+		git push ${proj}${remote_suffix} ${proj}${remote_suffix}_update:update_from_superproject
+		echo "done pushing ${proj}${remote_suffix}_update to zstash. Delete?"
+		read resp
+		if [[ $resp =~ ^[yY][eE]?[sS]?$ ]]; then
+			git branch -D ${proj}${remote_suffix}_update
+		fi
+	done
+	echo "Changes pushed to 'subtree_update' branch of upstream repositories. You must now merge that branch to master on those repositories (just call the merge_from_superproject script if it exists)."
+elif [ "$task" == "create" ]; then
+	proj="$2"
+	projurl="$3"
+	projremote="${proj}${remote_suffix}"
+
+	if [ -z "$proj" -o -z "$projremote" -o -z "$projurl" ]; then
+		echo "Usage: $0 create <name> <remote_url>"
+		echo " where <name> is just the name of the subproject (actually only used locally)"
+		echo "       <remote_url> is the URL of the subproject's git repository."
+		exit 1
+	fi
+
+	echo "This will create a directory in this repository ($subdir/$proj) into which project at '$projurl' will be merged. The repository at this URL will be referred to here with the remote '$projremote'."
+	echo "If this is not OK, press Ctrl-C to abort. Otherwise, hit enter."
+	read resp
+
+	git remote add ${projremote} ${projurl}
+	git subtree add -P ${subdir}/${proj} --squash -m "Add ${proj} project as subtree" ${projremote} master
+
+	echo "Done. Subproject now exists under '$subdir/$proj'."
+
+else
+	echo "Error: unknown command: supported are 'pull' or 'push' or 'create'."
+	exit 1
+fi

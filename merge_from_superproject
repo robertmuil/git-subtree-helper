@@ -1,0 +1,14 @@
+#!/bin/bash
+#This just merges updates from a superproject (which has this project embedded
+# in it as a subtree) into the current branch, and deletes the branch
+# when it's done.
+
+set -o errexit
+
+git pull
+
+git merge origin/update_from_superproject
+
+echo "Done merging. Delete superproject update branch? (ctrl-c for no)"
+read
+git push origin :update_from_superproject
