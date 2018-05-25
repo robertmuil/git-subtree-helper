@@ -14,7 +14,7 @@ Robert Muil.
 
 The other repository will be referred to here as the 'superproject'.
 
-### installing 'subprojects' script into your superproject
+### installing `subprojects` script into your superproject
 
 Simply copy the 'subprojects' script into your superproject (a working copy of the project into which you want to include this repository), and make it executable:
 
@@ -25,7 +25,7 @@ NB: if the above line doesn't work (if the downloaded file is HTML), then point 
 ### creating sub-project
 
 	$ cd <superproject>
-	$ ./subprojects create analysis '<git url to library project>'
+	$ ./subprojects create <library_name> '<git url to library project>'
 
 ### bringing changes from upstream
 
@@ -35,7 +35,7 @@ NB: if the above line doesn't work (if the downloaded file is HTML), then point 
 
 	$ ./subprojects push
 
-##git subtree
+## git subtree
 
 If you don't want to use the script's I wrote (they're possibly buggy), then
 here's how to do it all directly with the subtree command.
@@ -47,24 +47,24 @@ To inform yourself about the command do:
 	`$ git subtree --help`
 
 ### creating sub-project
-To include this in a project using git subtree, do the following:
+To include this in a project using git subtree, do the following: (replace 'library' with your own library name)
 
 2. Add a remote repository reference (this is optional but recommended):  
-	`$ git remote add analysis_origin ssh://git@stash.zalando.net:7999/personalisation/analysis-library.git`
+	`$ git remote add library_origin <library_git_url>`
 3. Import the project as a subtree at `<path>` with:
-	`$ git subtree add -P <path> --squash -m "Add analysis project as subtree" analysis_origin master`
+	`$ git subtree add -P <path> --squash -m "Add library project as subtree" library_origin master`
 
 ### bringing changes from upstream
 Then, in the future, to bring your local copy up to date, do:  
-	`$ git subtree pull -P <path> --squash -m "Updated to latest from analysis project" analysis_origin master`
+	`$ git subtree pull -P <path> --squash -m "Updated to latest from library project" library_origin master`
 
 ### pushing local changes back upstream
 To push local changes back to this (upstream) project:
 
 1. Extract the local changes in the analysis project to a separate branch:  
-	`$ git subtree split -P <path> --annotate="(split)" -b analysis_proj_update`
+	`$ git subtree split -P <path> --annotate="(split)" -b library_update`
 2. Push that branch up to the upstream repository (as an 'update' branch here - could also push to master but a bit dangerous)  
-	`$ git push analysis_origin analysis_proj_update:update_from_superproject`
+	`$ git push library_origin library_update:update_from_superproject`
 3. In this project, merge the update_from_superproject branch to master:  
 	`$ cd <working directory for this subproject>`  
 	`$ git checkout master && git merge update_from_superproject`
