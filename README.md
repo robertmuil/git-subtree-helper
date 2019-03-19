@@ -6,21 +6,23 @@ In this project are two scripts that ease use of the subtree command. The two sc
 1. `merge_from_superproject`
 
 This repo is not actually necessary: you should embed the two scripts into your library project and then operate from there.
-In following documentation 'this repo' refers to your library repo not this one directly.
+In following documentation, 'library repo' refers to your library project not this one directly.
+
+By 'library project' I just mean the sub-project that will be utilised as a component of other repos.
 
 Robert Muil.
 
-## How to include your library repository as a sub-project in another repository:
+## How to include your library repo as a sub-project in other repository:
 
-The other repository will be referred to here as the 'superproject'.
+The other repository will be referred to here as the 'superproject': this is a working copy of the project into which you want to include the library repo.
 
 ### installing `subprojects` script into your superproject
 
-Simply copy the 'subprojects' script into your superproject (a working copy of the project into which you want to include this repository), and make it executable:
+Simply copy the 'subprojects' script into your superproject and make it executable:
 
 	$ cd <superproject>
 	$ wget -O subprojects 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/subprojects' && chmod +x subprojects
-NB: if the above line doesn't work (if the downloaded file is HTML), then point your browser to the address, log in to github, then download the raw subprojects script, and make it executable manually.
+NB: if the above line doesn't work (if the downloaded file is HTML), then navigate to the `subprojects` script in this repo, log in to github, then download the raw `subprojects` script, and make it executable manually.
 
 ### creating sub-project
 
