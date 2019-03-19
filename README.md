@@ -17,6 +17,11 @@ Robert Muil.
 1. copy the `merge_from_superproject` script into library repo, root folder
 1. add and commit it to that repo
 
+	$ cd <libraryrepo>
+	$ wget -O merge_from_superproject 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/merge_from_superproject' && chmod +x merge_from_superproject
+	$ git add merge_from_superproject && git commit -m"add merge_from_superproject script to aid pushing downstream changes into library repo"
+
+
 ## How to include your library repo as a sub-project in other repository:
 
 The other repository will be referred to here as the 'superproject': this is a working copy of the project into which you want to include the library repo.
@@ -28,7 +33,7 @@ Copy the 'subprojects' script into your superproject, make it executable, and co
 	$ cd <superproject>
 	$ wget -O subprojects 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/subprojects' && chmod +x subprojects
 	$ [optional] vi subprojects...
-	$ git add subprojects && git commit -m"added subprojects script to manage library repos"
+	$ git add subprojects && git commit -m"add subprojects script to manage library repos"
 
 
 NB: if the above line doesn't work (if the downloaded file is HTML), then navigate to the `subprojects` script in this repo, log in to github, then download the raw `subprojects` script, and make it executable manually.
