@@ -12,6 +12,11 @@ By 'library project' I just mean the sub-project that will be utilised as a comp
 
 Robert Muil.
 
+## Setting up your library repo to use as a sub-project:
+
+1. copy the `merge_from_superproject` script into library repo, root folder
+1. add and commit it to that repo
+
 ## How to include your library repo as a sub-project in other repository:
 
 The other repository will be referred to here as the 'superproject': this is a working copy of the project into which you want to include the library repo.
@@ -32,6 +37,8 @@ NB: if the above line doesn't work (if the downloaded file is HTML), then naviga
 
 	$ cd <superproject>
 	$ ./subprojects create <library_name> '<git url to library project>'
+	
+NB: you can use any git url here: it might be convenient to use a local file URL if the library project will be under lots of development because then you can work completely offline.
 
 ### bringing changes from upstream
 
