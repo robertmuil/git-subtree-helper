@@ -19,7 +19,7 @@ The other repository will be referred to here as the 'superproject'.
 Simply copy the 'subprojects' script into your superproject (a working copy of the project into which you want to include this repository), and make it executable:
 
 	$ cd <superproject>
-	$ wget -O subprojects 'https://github.com/robertmuil/git-subtree-helper/browse/subprojects?raw' && chmod +x subprojects
+	$ wget -O subprojects 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/subprojects' && chmod +x subprojects
 NB: if the above line doesn't work (if the downloaded file is HTML), then point your browser to the address, log in to github, then download the raw subprojects script, and make it executable manually.
 
 ### creating sub-project
