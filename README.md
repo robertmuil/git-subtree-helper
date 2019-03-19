@@ -18,10 +18,14 @@ The other repository will be referred to here as the 'superproject': this is a w
 
 ### installing `subprojects` script into your superproject
 
-Simply copy the 'subprojects' script into your superproject and make it executable:
+Copy the 'subprojects' script into your superproject, make it executable, and commit the changes. You can also edit the script in between to customise for project:
 
 	$ cd <superproject>
 	$ wget -O subprojects 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/subprojects' && chmod +x subprojects
+	$ [optional] vi subprojects...
+	$ git add subprojects && git commit -m"added subprojects script to manage library repos"
+
+
 NB: if the above line doesn't work (if the downloaded file is HTML), then navigate to the `subprojects` script in this repo, log in to github, then download the raw `subprojects` script, and make it executable manually.
 
 ### creating sub-project
