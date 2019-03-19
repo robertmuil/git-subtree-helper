@@ -37,7 +37,7 @@ NB: if the above line doesn't work (if the downloaded file is HTML), then point 
 
 ## git subtree
 
-If you don't want to use the script's I wrote (they're possibly buggy), then
+If you don't want to use the scripts I wrote (they're possibly buggy), then
 here's how to do it all directly with the subtree command.
 
 The commands are long, but this works very well. You can set up aliases (either
@@ -71,10 +71,10 @@ To push local changes back to this (upstream) project:
 
 ## Other Mechanisms
 
-If you instead decide to use subtree merging, here is canonical advice:
+If you instead decide to use subtree *merge strategy* (which is different to the git subtree *command*), here is canonical advice:
 https://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html
 
-I first followed the following, and ended up in a horrible state:
+Be careful though: I first followed the following, and ended up in a horrible state:
 http://git-scm.com/book/en/Git-Tools-Subtree-Merging
 
 It should also actually be possible to incorporate projects as a
