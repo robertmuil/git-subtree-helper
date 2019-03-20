@@ -31,7 +31,7 @@ elif [ "$task" == "push" ]; then
 	for proj in ${subprojects[*]}; do
 		git subtree split -P ${subdir}/${proj} --annotate="(split)" -b ${proj}${remote_suffix}_update
 		git push ${proj}${remote_suffix} ${proj}${remote_suffix}_update:update_from_superproject
-		echo "done pushing ${proj}${remote_suffix}_update to zstash. Delete?"
+		echo "done pushing ${proj}${remote_suffix}_update. Delete?"
 		read resp
 		if [[ $resp =~ ^[yY][eE]?[sS]?$ ]]; then
 			git branch -D ${proj}${remote_suffix}_update
