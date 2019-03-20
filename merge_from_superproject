@@ -5,10 +5,18 @@
 
 set -o errexit
 
-git pull
+if [[ $(git branch -a |grep origin/update) ]]; then
+	echo "update from a non-local remote..."
+	git pull
+	git merge origin/update_from_superproject
+else
+	git merge update_from_superproject
+fi
 
-git merge origin/update_from_superproject
-
-echo "Done merging. Delete superproject update branch? (ctrl-c for no)"
+echo "Done merging. Delete update_from_superproject branch? (ctrl-c for no)"
 read
-git push origin :update_from_superproject
+if [[ $(git branch -a |grep origin/update) ]]; then
+	git push origin :update_from_superproject
+else
+	git branch -d update_from_superproject
+fi
