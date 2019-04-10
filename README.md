@@ -12,31 +12,18 @@ By 'library project' I just mean the sub-project that will be utilised as a comp
 
 Robert Muil.
 
-## Setting up your library repo to use as a sub-project:
-
-The `merge_from_superproject` script aids bringing downstream changes into the library repo. To set it up to use:
-
-1. copy the `merge_from_superproject` script into library repo's working copy, root folder
-1. add it to the `.gitignore`
-
-i.e.:
-	$ cd <libraryrepo>
-	$ wget -O merge_from_superproject 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/merge_from_superproject' && chmod +x merge_from_superproject
-	$ echo "merge_from_superproject" >> .gitignore 
-
-NB: don't want to store the script in the repo because it'll be confusing inside the superproject. It's just a helper to use from the library's working directory.
-
-## How to include your library repo as a sub-project in other repository:
+## Including your library repo as a sub-project in another repository:
 
 The other repository will be referred to here as the 'superproject': this is a working copy of the project into which you want to include the library repo.
 
 ### installing `subprojects` script into your superproject
 
 Copy the 'subprojects' script into your superproject, make it executable, and commit the changes. You can also edit the script in between to customise for project:
-	$ cd <superproject>
-	$ wget -O subprojects 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/subprojects' && chmod +x subprojects
-	$ [optional] vi subprojects...
-	$ git add subprojects && git commit -m"add subprojects script to manage library repos"
+
+    $ cd <superproject>
+    $ wget -O subprojects 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/subprojects' && chmod +x subprojects
+    $ [optional] vi subprojects...
+    $ git add subprojects && git commit -m"add subprojects script to manage library repos"
 
 
 NB: if the above line doesn't work (if the downloaded file is HTML), then navigate to the `subprojects` script in this repo, log in to github, then download the raw `subprojects` script, and make it executable manually.
@@ -55,6 +42,23 @@ NB: you can use any git url here: it might be convenient to use a local file URL
 ### pushing local changes back upstream
 
 	$ ./subprojects push
+	
+
+## Setting up your library repo to use as a sub-project:
+
+The `merge_from_superproject` script aids bringing downstream changes into the library repo. To set it up to use:
+
+1. copy the `merge_from_superproject` script into library repo's working copy, root folder
+1. add it to the `.gitignore`
+
+i.e.:
+
+    $ cd <libraryrepo>
+    $ wget -O merge_from_superproject 'https://raw.githubusercontent.com/robertmuil/git-subtree-helper/master/merge_from_superproject' && chmod +x merge_from_superproject
+    $ echo "merge_from_superproject" >> .gitignore 
+
+NB: don't want to store the script in the repo because it'll be confusing inside the superproject. It's just a helper to use from the library's working directory.
+
 
 ## git subtree
 
