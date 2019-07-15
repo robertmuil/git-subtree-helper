@@ -59,6 +59,14 @@ i.e.:
 
 NB: don't want to store the script in the repo because it'll be confusing inside the superproject. It's just a helper to use from the library's working directory.
 
+### bringing in changes from superproject
+
+just use the `merge_from_superproject` script once you've 'pushed' the changes from subproj!
+
+### splitting out a library from a folder within existing repo
+
+https://help.github.com/en/articles/splitting-a-subfolder-out-into-a-new-repository
+
 
 ## git subtree
 
